@@ -1,5 +1,13 @@
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+  resource:
+    path: ../src/Controller/
+    namespace: App\Controller
+  type: attribute
+
+app_setProdyct:
+  path: /setProdyct
+  controller: App\Controller\MainController::setProdyct
+
+getProdyct:
+  path: /getProdyct
+  controller: App\Controller\MainController::getProdyct

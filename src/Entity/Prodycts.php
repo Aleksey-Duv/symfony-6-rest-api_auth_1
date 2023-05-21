@@ -14,7 +14,7 @@ class Prodycts
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $Name = null;
 
     #[ORM\Column]
     private ?int $prise = null;
