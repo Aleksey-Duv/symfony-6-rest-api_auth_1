@@ -33,10 +33,25 @@ class MainController extends AbstractController
 
         return new Response( 'сохранено' );
     }
-    public function getProdyct(): JsonResponse
+    public function getProdyct(PersistenceManagerRegistry $doctrine): Response
     {
-        return $this->json([
-            'message' => 'test',
-        ]);
+
+        $prodyct = $doctrine->getRepository(Prodycts::class)->findAll();
+//        $prodyct = $doctrine->getRepository(Prodycts::class)->find(1);
+//        $prod = $prodyct->getName();
+//        if (isset($User)) {
+//            $name = $User->getUserName() ;
+//        }
+//dump($User);die;
+
+//        return new Response($name );
+
+
+//        return new Response( $prod );
+        return $this->json($prodyct
+//            [
+//            'message' => 'test',
+//        ]
+        );
     }
 }
