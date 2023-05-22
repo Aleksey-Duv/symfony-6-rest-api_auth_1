@@ -11,3 +11,6 @@ app_setProdyct:
 getProdyct:
   path: /getProdyct
   controller: App\Controller\MainController::getProdyct
+
+api_login_check:
+  path: /api/login_check
