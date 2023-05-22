@@ -23,13 +23,13 @@ class UserController extends AbstractController
     }
 
 //    #[Route('/user', name: 'app_user')]
-    #[Route('/user', name: 'app_user', methods: 'POST')]
-    public function index(Request $request): JsonResponse
+    #[Route('/userCreate', name: 'user_create', methods: 'POST')]
+    public function userCreate(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         $email = $data['email'];
         $password = $data['password'];
-
+//dd($data);
         $email_exist = $this->user->findOneBy($email);
 
         if ($email_exist) {
