@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use function MongoDB\BSON\toJSON;
 
 class UserController extends AbstractController
 {
@@ -29,16 +31,16 @@ class UserController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $email = $data['email'];
         $password = $data['password'];
-//dd($data);
-        $email_exist = $this->user->findOneBy($email);
-
+//dd($data );
+        $email_exist = $this->user->findOneByEmail($email);
+//dd($email_exist);
         if ($email_exist) {
 //            return $this->json('',200);
             return new JsonResponse
             (
                 [
                     'statys' => false,
-                    'message' => 'проверка '
+                    'message' => 'mail already exists'
                 ]
             );
         } else {
@@ -52,7 +54,7 @@ class UserController extends AbstractController
             (
                 [
                     'statys'=>true,
-                    'message'=>'tru'
+                    'message'=>'user added'
                 ]
             );
 
@@ -63,4 +65,35 @@ class UserController extends AbstractController
 //            'path' => 'src/Controller/UserController.php',
 //        ]);
     }
+
+//    #[Route('/userCreate', name: 'user_create', methods: 'POST')]
+//    public function userCreate(Request $request): JsonResponse
+//    {
+//       return 'dd';
+//    }
+
+
+    #[Route('/getAllUser', name: 'get_allures', methods: 'GET')]
+    public function getAllUser(entityManagerInterface $manager): JsonResponse
+    {
+        $users=$this->user->findAll();
+
+        $data = [];
+
+        foreach ($users as $user) {
+            $data[] = [
+                'id' => $user->getId(),
+                'email' => $user->getEmail(),
+                'description' => $user->getRoles(),
+                'password' => $user->getPassword(),
+            ];
+        }
+
+        $response = new JsonResponse($data);
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+
+    }
+
 }
