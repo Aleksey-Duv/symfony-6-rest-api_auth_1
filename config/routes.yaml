@@ -4,13 +4,13 @@ controllers:
     namespace: App\Controller
   type: attribute
 
-app_setProdyct:
-  path: /setProdyct
-  controller: App\Controller\MainController::setProdyct
-
-getProdyct:
-  path: /getProdyct
-  controller: App\Controller\MainController::getProdyct
+#app_setProdyct:
+#  path: /setProdyct
+#  controller: App\Controller\MainController::setProdyct
+#
+#getProdyct:
+#  path: /getProdyct
+#  controller: App\Controller\MainController::getProdyct
 
 api_login_check:
   path: /api/login_check
